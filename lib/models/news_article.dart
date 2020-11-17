@@ -28,6 +28,7 @@ class NewsArticle {
     publishedAt: json['publishedAt'],
     content: json['content'],
 
+
   );
   }
 }
