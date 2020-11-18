@@ -8,11 +8,11 @@ class NewsScreen extends StatefulWidget {
 }
 
 class _NewsScreenState extends State<NewsScreen> {
-
   @override
   void initState() {
     super.initState();
-    Provider.of<NewsArticleListViewModel>(context , listen: false).topHeadlines();
+    Provider.of<NewsArticleListViewModel>(context, listen: false)
+        .topHeadlines();
   }
 
   @override
@@ -20,10 +20,15 @@ class _NewsScreenState extends State<NewsScreen> {
     var listVieModel = Provider.of<NewsArticleListViewModel>(context);
 
     return Scaffold(
-      appBar: AppBar(
-
+      appBar: AppBar(),
+      body: GridView.builder(
+        gridDelegate:
+            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+        itemBuilder: (context, index) {
+          return Text(listVieModel.articles[index].title);
+        },
+        itemCount: listVieModel.articles.length,
       ),
-      body: Text(listVieModel.articles.length.toString()),
     );
   }
 }
