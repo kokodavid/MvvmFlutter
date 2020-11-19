@@ -5,7 +5,7 @@ class WebService{
   var dio = new Dio();
 
   Future<List<NewsArticle>> fetchTopHeadlines() async{
-    String url = 'http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=1428f88677af4d5f86c3f12d3601ca89';
+    String url = 'http://newsapi.org/v2/everything?q=apple&from=2020-11-17&to=2020-11-17&sortBy=popularity&apiKey=1428f88677af4d5f86c3f12d3601ca89';
 
     final response = await dio.get(url);
 
