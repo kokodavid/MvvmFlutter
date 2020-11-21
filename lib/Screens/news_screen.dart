@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:newsapp/utils/constants.dart';
 import 'package:newsapp/viewModels/news_article_list_view_model.dart';
 import 'package:newsapp/widgets/news_grid.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,20 @@ class _NewsScreenState extends State<NewsScreen> {
     return Scaffold(
         appBar: AppBar(
           actions: <Widget>[
-            Icon(Icons.more_vert)
+            PopupMenuButton(
+                onSelected: (country) {
+                  listVieModel
+                      .topCountryHeadlines(Constants.Countries[country]);
+                },
+                icon: Icon(Icons.more_vert),
+                itemBuilder: (_) {
+                  return Constants.Countries.keys
+                      .map((v) => PopupMenuItem(
+                            value: v,
+                            child: Text(v),
+                          ))
+                      .toList();
+                })
           ],
         ),
         body: SafeArea(
@@ -32,11 +46,10 @@ class _NewsScreenState extends State<NewsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left:30),
-                child: Text("News",style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 45
-                ),
+                padding: const EdgeInsets.only(left: 30),
+                child: Text(
+                  "News",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45),
                 ),
               ),
               Divider(
@@ -47,20 +60,18 @@ class _NewsScreenState extends State<NewsScreen> {
                 endIndent: 10,
               ),
               Padding(
-                padding: const EdgeInsets.only(left:30, top: 15, bottom: 15),
+                padding: const EdgeInsets.only(left: 30, top: 15, bottom: 15),
                 child: Text(
-                  "Headline", style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20
-                ),
+                  "Headline",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              Expanded(child: NewsGrid(
+              Expanded(
+                  child: NewsGrid(
                 articles: listVieModel.articles,
               ))
             ],
           ),
-        )
-    );
+        ));
   }
 }

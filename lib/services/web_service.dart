@@ -1,13 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:newsapp/models/news_article.dart';
+import 'package:newsapp/utils/constants.dart';
 
 class WebService{
   var dio = new Dio();
 
   Future<List<NewsArticle>> fetchTopHeadlines() async{
-    String url = 'http://newsapi.org/v2/everything?q=apple&from=2020-11-17&to=2020-11-17&sortBy=popularity&apiKey=1428f88677af4d5f86c3f12d3601ca89';
+   
+    final response = await dio.get(Constants.TOP_HEADLINES_URL);
 
-    final response = await dio.get(url);
+    if(response.statusCode == 200){
+        final result = response.data;
+        Iterable list = result['articles'];
+        return  list.map((article) => NewsArticle.fromJson(article)).toList();
+    }else{
+      throw Exception("Failed to get News");
+    }
+
+  }
+
+
+  Future<List<NewsArticle>> fetchTopHeadlinesCountry(String country) async{
+   
+    final response = await dio.get(Constants.headlinesFor(country));
 
     if(response.statusCode == 200){
         final result = response.data;

@@ -15,25 +15,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Color(0xfffefdfd),
         appBarTheme: AppBarTheme(
-          color: Color(0xfffefdfd),
-          elevation: 0,
-          textTheme: TextTheme(
-            title: TextStyle(
-              color: Colors.black
-            )
-          ),
-          actionsIconTheme: IconThemeData(
-            color: Colors.black
-          )
-        ),
+            color: Color(0xfffefdfd),
+            elevation: 0,
+            textTheme: TextTheme(title: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+            iconTheme: IconThemeData(color: Colors.black),
+            actionsIconTheme: IconThemeData(color: Colors.black)),
       ),
-      home: MultiProvider(
-        providers: [ChangeNotifierProvider(
+      home: MultiProvider(providers: [
+        ChangeNotifierProvider(
           create: (_) => NewsArticleListViewModel(),
-        )],
-          child: NewsScreen()
-      ),
+        )
+      ], child: NewsScreen()),
     );
   }
 }
-

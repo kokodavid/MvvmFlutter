@@ -26,6 +26,13 @@ dependencies:
   dio: ^3.0.10
   provider: ^4.3.2
   cached_network_image: ^2.3.3
+  intl: ^0.16.1
+  flutter_launcher_icons: ^0.8.1
+
+flutter_icons:
+  image_path: "assets/icons/playstore.png" 
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
